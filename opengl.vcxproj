@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{1C0D020A-59CD-4F8A-84E8-5C4831A32FCF}</ProjectGuid>
+    <ProjectGuid>{88166F48-F9F5-45C6-A167-CD41DB26060E}</ProjectGuid>
     <RootNamespace>opengl</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -62,7 +62,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="glm\CMakeLists.txt" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glm\core\func_common.hpp" />
@@ -290,9 +290,6 @@
     <None Include="glm\gtx\vector_query.inl" />
     <None Include="glm\gtx\verbose_operator.inl" />
     <None Include="glm\gtx\wrap.inl" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="opengl\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
