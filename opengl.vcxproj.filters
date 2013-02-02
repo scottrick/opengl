@@ -383,6 +383,12 @@
     <ClInclude Include="glm\virtrev\xstream.hpp">
       <Filter>Source Files\glm</Filter>
     </ClInclude>
+    <ClInclude Include="opengl\GLContext.h">
+      <Filter>Source Files\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\GLScene.h">
+      <Filter>Source Files\opengl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="glm\core\func_common.inl">
@@ -692,6 +698,12 @@
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="opengl\GLContext.cpp">
+      <Filter>Source Files\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="opengl\GLScene.cpp">
+      <Filter>Source Files\opengl</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
