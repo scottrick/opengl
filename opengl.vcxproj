@@ -67,6 +67,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="opengl\GLContext.cpp" />
     <ClCompile Include="opengl\GLScene.cpp" />
+    <ClCompile Include="opengl\GLShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glm\core\func_common.hpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="glm\virtrev\xstream.hpp" />
     <ClInclude Include="opengl\GLContext.h" />
     <ClInclude Include="opengl\GLScene.h" />
+    <ClInclude Include="opengl\GLShader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="glm\core\func_common.inl" />

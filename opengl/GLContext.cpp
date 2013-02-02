@@ -1,5 +1,7 @@
 #include "GLContext.h"
 
+#include "GLShader.h"
+
 #include <cassert>
 #include <iostream>
 using namespace std;
@@ -29,12 +31,53 @@ void GLContext::create()
 	glewExperimental = GL_TRUE;
 	glewInit();
 
-	while( glfwGetWindowParam( GLFW_OPENED ) )
+	float vertices[] = {
+		 0.0f,  0.5f, // Vertex 1 (X, Y)
+		 0.5f, -0.5f, // Vertex 2 (X, Y)
+		-0.5f, -0.5f  // Vertex 3 (X, Y)
+	};
+
+	GLuint vbo;
+	glGenBuffers( 1, &vbo );
+	glBindBuffer( GL_ARRAY_BUFFER, vbo );
+	glBufferData( GL_ARRAY_BUFFER, sizeof( vertices ), vertices, GL_STATIC_DRAW );
+
+	GLShader fragShader("shaders/basic.frag");
+	GLShader vertShader("shaders/basic.vert");
+
+	GLuint shaderProgram = glCreateProgram();
+	glAttachShader(shaderProgram, fragShader.getShader());
+	glAttachShader(shaderProgram, vertShader.getShader());
+	
+	glLinkProgram(shaderProgram);
+	glUseProgram(shaderProgram);
+
+	GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
+	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 0, 0);
+
+	glEnableVertexAttribArray(posAttrib);
+	GLuint vao;
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
+	while(glfwGetWindowParam(GLFW_OPENED))
 	{
-		if ( glfwGetKey( GLFW_KEY_ESC ) == GLFW_PRESS )
+		if (glfwGetKey(GLFW_KEY_ESC) == GLFW_PRESS)
 			break;
 
+		glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
+		glClear( GL_COLOR_BUFFER_BIT );
+
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+
 		glfwSwapBuffers();
+	}
+}
+
+void GLContext::checkError() {
+	GLenum error = glGetError();
+	if (error) {
+		cout << "error? " << error << endl;
 	}
 }
 

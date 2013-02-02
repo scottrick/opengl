@@ -1,5 +1,4 @@
-#ifndef GL_CONTEXT_H
-#define GL_CONTEXT_H
+#pragma once
 
 #pragma comment(lib, "GLFW")
 #pragma comment(lib, "opengl32")
@@ -27,11 +26,9 @@ public:
     GLScene *getScene();
 
 protected:
-
+	void checkError();
 
 private:
     GLScene scene;
 
 };
-
-#endif

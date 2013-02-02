@@ -389,6 +389,9 @@
     <ClInclude Include="opengl\GLScene.h">
       <Filter>Source Files\opengl</Filter>
     </ClInclude>
+    <ClInclude Include="opengl\GLShader.h">
+      <Filter>Source Files\opengl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="glm\core\func_common.inl">
@@ -696,13 +699,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="opengl\GLContext.cpp">
       <Filter>Source Files\opengl</Filter>
     </ClCompile>
     <ClCompile Include="opengl\GLScene.cpp">
+      <Filter>Source Files\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="opengl\GLShader.cpp">
       <Filter>Source Files\opengl</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,5 +1,4 @@
-#ifndef _GL_SCENE_
-#define _GL_SCENE_
+#pragma once
 
 class GLScene
 {
@@ -15,5 +14,3 @@ protected:
 private:
 
 };
-
-#endif
