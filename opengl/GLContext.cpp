@@ -17,13 +17,30 @@ GLContext::~GLContext()
 void GLContext::create() 
 {
 	glfwInit();
-    glfwSleep( 1.0 );
-    glfwTerminate();
+
+	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
+	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 2);
+	glfwOpenWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	glfwOpenWindowHint(GLFW_WINDOW_NO_RESIZE, GL_TRUE);
+	glfwOpenWindow(800, 600, 0, 0, 0, 0, 0, 0, GLFW_WINDOW);
+	glfwSetWindowTitle("OpenGL");
+
+	glewExperimental = GL_TRUE;
+	glewInit();
+
+	while( glfwGetWindowParam( GLFW_OPENED ) )
+	{
+		if ( glfwGetKey( GLFW_KEY_ESC ) == GLFW_PRESS )
+			break;
+
+		glfwSwapBuffers();
+	}
 }
 
 void GLContext::destroy() 
 {
-
+    glfwTerminate();
 }
 
 void GLContext::dumpExtensions()

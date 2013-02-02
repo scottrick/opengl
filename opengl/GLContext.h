@@ -2,8 +2,9 @@
 #define GL_CONTEXT_H
 
 #pragma comment(lib, "GLFW")
-#pragma comment (lib, "opengl32")
-#pragma comment (lib, "glu32")
+#pragma comment(lib, "opengl32")
+#pragma comment(lib, "glu32")
+#pragma comment(lib, "glew32")
 
 #include <GL/glew.h>
 #include <GL/glfw.h>
