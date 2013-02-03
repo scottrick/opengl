@@ -10,7 +10,7 @@ GLShader::GLShader(std::string filename) {
 }
 
 GLShader::~GLShader(void) {
-
+	glDeleteShader(shader);
 }
 
 void GLShader::compile(std::string filename) {
