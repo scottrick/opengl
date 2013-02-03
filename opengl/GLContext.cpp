@@ -31,6 +31,8 @@ void GLContext::create()
 	glewExperimental = GL_TRUE;
 	glewInit();
 
+	checkError();
+	
 	float vertices[] = {
 		 0.0f,  0.5f, // Vertex 1 (X, Y)
 		 0.5f, -0.5f, // Vertex 2 (X, Y)
@@ -52,21 +54,23 @@ void GLContext::create()
 	glLinkProgram(shaderProgram);
 	glUseProgram(shaderProgram);
 
-	GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
-	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 0, 0);
-
-	glEnableVertexAttribArray(posAttrib);
 	GLuint vao;
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
+	GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
+	glEnableVertexAttribArray(posAttrib);
+	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 0, 0);
+
 	while(glfwGetWindowParam(GLFW_OPENED))
 	{
+		checkError();
+
 		if (glfwGetKey(GLFW_KEY_ESC) == GLFW_PRESS)
 			break;
 
-		glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
-		glClear( GL_COLOR_BUFFER_BIT );
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
@@ -77,7 +81,7 @@ void GLContext::create()
 void GLContext::checkError() {
 	GLenum error = glGetError();
 	if (error) {
-		cout << "error? " << error << endl;
+		cout << "glError: " << error << endl;
 	}
 }
 
