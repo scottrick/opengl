@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "opengl\GLContext.h"
+#include "GLContext.h"
 
 /* 
 	OpenGL boilerplate setup.  Requires GLEW and GLFW, and uses GLM.

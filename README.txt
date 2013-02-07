@@ -3,7 +3,7 @@ Required libraries:
 zlib
 opengl 3.2
 
-glm:
+glm (included):
 http://glm.g-truc.net/
 
 libpng:

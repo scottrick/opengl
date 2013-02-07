@@ -383,13 +383,19 @@
     <ClInclude Include="glm\virtrev\xstream.hpp">
       <Filter>Source Files\glm</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\GLContext.h">
+    <ClInclude Include="GLContext.h">
       <Filter>Source Files\opengl</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\GLScene.h">
+    <ClInclude Include="GLScene.h">
       <Filter>Source Files\opengl</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\GLShader.h">
+    <ClInclude Include="GLShader.h">
+      <Filter>Source Files\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="GLTextureFactory.h">
+      <Filter>Source Files\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="GLTexture.h">
       <Filter>Source Files\opengl</Filter>
     </ClInclude>
   </ItemGroup>
@@ -699,16 +705,22 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="opengl\GLContext.cpp">
-      <Filter>Source Files\opengl</Filter>
-    </ClCompile>
-    <ClCompile Include="opengl\GLScene.cpp">
-      <Filter>Source Files\opengl</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="opengl\GLShader.cpp">
+    <ClCompile Include="GLContext.cpp">
+      <Filter>Source Files\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="GLScene.cpp">
+      <Filter>Source Files\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="GLShader.cpp">
+      <Filter>Source Files\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="GLTextureFactory.cpp">
+      <Filter>Source Files\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="GLTexture.cpp">
       <Filter>Source Files\opengl</Filter>
     </ClCompile>
   </ItemGroup>

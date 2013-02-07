@@ -1,6 +1,16 @@
 #include "GLContext.h"
 
 #include "GLShader.h"
+#include "GLTextureFactory.h"
+
+#pragma comment(lib, "GLFW")
+#pragma comment(lib, "opengl32")
+#pragma comment(lib, "glu32")
+#pragma comment(lib, "glew32")
+
+#include <GL/glew.h>
+#include <GL/glfw.h>
+#include "glm/glm.hpp"
 
 #include <cassert>
 #include <ctime>
@@ -160,9 +170,4 @@ void GLContext::dumpInfo()
     cout << "GL_RENDERER:  " << renderer << endl;
     cout << "GL_VENDOR:    " << vendor << endl;
     cout << "GL_SHADELANG: " << shaderLang << endl;
-}
-
-GLScene *GLContext::getScene()
-{
-    return &scene;
 }
