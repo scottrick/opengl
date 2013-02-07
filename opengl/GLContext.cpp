@@ -49,10 +49,10 @@ void GLContext::create()
 	// this setup is needed for EACH VertexArrayObject I want to use
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	float vertices[] = {
-		-0.5f,  0.5f, 0.84f, 
-		 0.5f,  0.5f, 0.63f, 
-		 0.5f, -0.5f, 0.2f, 
-		-0.5f, -0.5f, 0.04f, 
+		-0.5f,  0.5f, 0.0f, 0.0f, 0.8f,
+		 0.5f,  0.5f, 0.3f, 0.0f, 0.9f,
+		 0.5f, -0.5f, 0.0f, 0.3f, 0.8f,
+		-0.5f, -0.5f, 0.0f, 0.0f, 0.3f,
 	};
 
 	GLubyte indices[] = {
@@ -79,11 +79,11 @@ void GLContext::create()
 
 	GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
 	glEnableVertexAttribArray(posAttrib);
-	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
+	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
 
 	GLint colorAttrib = glGetAttribLocation(shaderProgram, "color");
 	glEnableVertexAttribArray(colorAttrib);
-	glVertexAttribPointer(colorAttrib, 1, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) (2 * sizeof(float)));
+	glVertexAttribPointer(colorAttrib, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *) (2 * sizeof(float)));
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 
