@@ -1,9 +1,13 @@
 #version 150
 
 in vec3 vertexColor;
+in vec2 textureCoord;
+
 out vec4 outColor;
+
+uniform sampler2D textureSample;
 
 void main()
 {
-    outColor = vec4(vertexColor.r, vertexColor.g, vertexColor.b, 1.0);
+	outColor = texture(textureSample, textureCoord);
 }

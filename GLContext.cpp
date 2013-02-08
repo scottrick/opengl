@@ -1,12 +1,9 @@
 #include "GLContext.h"
 
 #include "GLShader.h"
+#include "GLTexture.h"
 #include "GLTextureFactory.h"
-
-#pragma comment(lib, "GLFW")
-#pragma comment(lib, "opengl32")
-#pragma comment(lib, "glu32")
-#pragma comment(lib, "glew32")
+#include "GLUtility.h"
 
 #include <GL/glew.h>
 #include <GL/glfw.h>
@@ -36,13 +33,13 @@ void GLContext::create()
 	glfwOpenWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	glfwOpenWindowHint(GLFW_WINDOW_NO_RESIZE, GL_TRUE);
-	glfwOpenWindow(800, 600, 0, 0, 0, 0, 0, 0, GLFW_WINDOW);
+	glfwOpenWindow(800, 800, 0, 0, 0, 0, 0, 0, GLFW_WINDOW);
 	glfwSetWindowTitle("OpenGL");
 
 	glewExperimental = GL_TRUE;
 	glewInit();
 
-	checkError();
+	GLUtility::checkError();
 	dumpInfo();
 	
 	GLShader fragShader("shaders/basic.frag");
@@ -59,10 +56,10 @@ void GLContext::create()
 	// this setup is needed for EACH VertexArrayObject I want to use
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	float vertices[] = {
-		-0.5f,  0.5f, 0.0f, 0.0f, 0.8f,
-		 0.5f,  0.5f, 0.3f, 0.0f, 0.9f,
-		 0.5f, -0.5f, 0.0f, 0.3f, 0.8f,
-		-0.5f, -0.5f, 0.0f, 0.0f, 0.3f,
+		-0.8f,  0.8f, 0.0f, 0.0f, 0.8f, 0.0f, 0.0f, //top left
+		 0.8f,  0.8f, 0.3f, 0.0f, 0.9f, 1.0f, 0.0f, //top right
+		 0.8f, -0.8f, 0.0f, 0.3f, 0.8f, 1.0f, 1.0f, //bottom right
+		-0.8f, -0.8f, 0.0f, 0.0f, 0.3f, 0.0f, 1.0f, //bottom left
 	};
 
 	GLubyte indices[] = {
@@ -89,17 +86,23 @@ void GLContext::create()
 
 	GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
 	glEnableVertexAttribArray(posAttrib);
-	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
+	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), 0);
 
 	GLint colorAttrib = glGetAttribLocation(shaderProgram, "color");
 	glEnableVertexAttribArray(colorAttrib);
-	glVertexAttribPointer(colorAttrib, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *) (2 * sizeof(float)));
+	glVertexAttribPointer(colorAttrib, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void *) (2 * sizeof(float)));
+
+	GLint textureAttrib = glGetAttribLocation(shaderProgram, "texture");
+	glEnableVertexAttribArray(textureAttrib);
+	glVertexAttribPointer(textureAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void *) (5 * sizeof(float)));
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	GLTexture *texture = GLTextureFactory::createTextureForImage("hobbes.png");
+
 	while(glfwGetWindowParam(GLFW_OPENED))
 	{
-		checkError();
+		GLUtility::checkError();
 
 		if (glfwGetKey(GLFW_KEY_ESC) == GLFW_PRESS) {
 			break;
@@ -117,13 +120,8 @@ void GLContext::create()
 	glDeleteBuffers(1, &ebo);
 	glDeleteBuffers(1, &vbo);
 	glDeleteVertexArrays(1, &vao);
-}
 
-void GLContext::checkError() {
-	GLenum error = glGetError();
-	if (error) {
-		cout << "glError: " << error << endl;
-	}
+	delete texture;
 }
 
 void GLContext::destroy() 

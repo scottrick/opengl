@@ -398,6 +398,9 @@
     <ClInclude Include="GLTexture.h">
       <Filter>Source Files\opengl</Filter>
     </ClInclude>
+    <ClInclude Include="GLUtility.h">
+      <Filter>Source Files\opengl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="glm\core\func_common.inl">

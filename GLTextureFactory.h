@@ -5,7 +5,7 @@ class GLTexture;
 class GLTextureFactory
 {
 public:
-	static GLTexture *createTextureForPNG(const char *filename);
+	static GLTexture *createTextureForImage(const char *imageFilename);
 
 private:
 	GLTextureFactory(void);

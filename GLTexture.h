@@ -5,7 +5,7 @@
 class GLTexture
 {
 public:
-	GLTexture(GLuint texture);
+	GLTexture(int width, int height, unsigned char *data, bool mipmap);
 	~GLTexture();
 
 private:

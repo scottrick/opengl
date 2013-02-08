@@ -1,5 +1,11 @@
 #pragma once
 
+#pragma comment(lib, "GLFW")
+#pragma comment(lib, "opengl32")
+#pragma comment(lib, "glu32")
+#pragma comment(lib, "glew32")
+#pragma comment(lib, "SOIL")
+
 class GLContext
 {
 public:
@@ -13,7 +19,6 @@ public:
     void dumpInfo();
 
 protected:
-	void checkError();
 
 private:
 

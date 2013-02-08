@@ -43,6 +43,8 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -199,6 +201,7 @@
     <ClInclude Include="GLShader.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="GLTextureFactory.h" />
+    <ClInclude Include="GLUtility.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="glm\core\func_common.inl" />
