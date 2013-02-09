@@ -29,3 +29,8 @@ GLTexture::~GLTexture(void)
 {
 	glDeleteTextures(1, &texture);
 }
+
+GLuint GLTexture::getTexture() const 
+{
+	return texture;
+}

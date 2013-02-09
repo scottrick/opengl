@@ -98,9 +98,20 @@ void GLContext::create()
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	GLTexture *texture = GLTextureFactory::createTextureForImage("hobbes.png");
+	GLTexture *textureOne = GLTextureFactory::createTextureForImage("hobbes.png");
+	GLTexture *textureTwo = GLTextureFactory::createTextureForImage("test_texture.png");
 
-	while(glfwGetWindowParam(GLFW_OPENED))
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, textureOne->getTexture());
+	glUniform1i(glGetUniformLocation(shaderProgram, "textureOne"), 0);
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, textureTwo->getTexture());
+	glUniform1i(glGetUniformLocation(shaderProgram, "textureTwo"), 1);
+
+	GLuint ratioUniform = glGetUniformLocation(shaderProgram, "time");
+
+	while(glfwGetWindowParam(GLFW_OPENED))		
 	{
 		GLUtility::checkError();
 
@@ -110,6 +121,9 @@ void GLContext::create()
 
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		GLfloat time = ((float)clock() / (float)CLOCKS_PER_SEC);
+		glUniform1f(ratioUniform, time);
 
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, 0);
 
@@ -121,7 +135,8 @@ void GLContext::create()
 	glDeleteBuffers(1, &vbo);
 	glDeleteVertexArrays(1, &vao);
 
-	delete texture;
+	delete textureOne;
+	delete textureTwo;
 }
 
 void GLContext::destroy() 
