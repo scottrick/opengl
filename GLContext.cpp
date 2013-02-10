@@ -8,11 +8,23 @@
 #include <GL/glew.h>
 #include <GL/glfw.h>
 #include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 #include <cassert>
 #include <ctime>
 #include <iostream>
 using namespace std;
+
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
+
+bool bDoFlip = false;
+float flipDuration = 0.6f;
+float flipStartTime = -flipDuration;
+
+bool bRunning = false;
+void GLFWCALL keyboardCallback(int key, int action);
 
 GLContext::GLContext()
 {
@@ -26,6 +38,8 @@ GLContext::~GLContext()
 
 void GLContext::create() 
 {
+	bRunning = true;
+
 	glfwInit();
 
 	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
@@ -33,8 +47,10 @@ void GLContext::create()
 	glfwOpenWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	glfwOpenWindowHint(GLFW_WINDOW_NO_RESIZE, GL_TRUE);
-	glfwOpenWindow(800, 800, 0, 0, 0, 0, 0, 0, GLFW_WINDOW);
+	glfwOpenWindow(WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0, 0, 0, 0, 0, GLFW_WINDOW);
 	glfwSetWindowTitle("OpenGL");
+
+	glfwSetKeyCallback(keyboardCallback);
 
 	glewExperimental = GL_TRUE;
 	glewInit();
@@ -111,11 +127,20 @@ void GLContext::create()
 
 	GLuint ratioUniform = glGetUniformLocation(shaderProgram, "time");
 
-	while(glfwGetWindowParam(GLFW_OPENED))		
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	GLuint modelTransformUniform = glGetUniformLocation(shaderProgram, "model");
+	GLuint viewTransformUniform = glGetUniformLocation(shaderProgram, "view");
+	GLuint projTransformUniform = glGetUniformLocation(shaderProgram, "proj");
+
+	glm::mat4 proj = glm::perspective( 45.0f, (float)WINDOW_WIDTH / (float)	WINDOW_HEIGHT, 1.0f, 10.0f );
+	glUniformMatrix4fv(projTransformUniform, 1, GL_FALSE, glm::value_ptr(proj));
+
+	while (glfwGetWindowParam(GLFW_OPENED))
 	{
 		GLUtility::checkError();
 
-		if (glfwGetKey(GLFW_KEY_ESC) == GLFW_PRESS) {
+		if (!bRunning) {
 			break;
 		}
 
@@ -124,6 +149,28 @@ void GLContext::create()
 
 		GLfloat time = ((float)clock() / (float)CLOCKS_PER_SEC);
 		glUniform1f(ratioUniform, time);
+
+		if (bDoFlip) {
+			bDoFlip = false;
+			flipStartTime = time;
+		}
+
+		glm::mat4 modelTransform;
+		modelTransform = glm::rotate(modelTransform, time * 18.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+
+		if (time < flipStartTime + flipDuration) {
+			modelTransform = glm::rotate(modelTransform, (time - flipStartTime) * (360.0f / flipDuration), glm::vec3(1.0f, 0.0f, 0.0f));
+		}
+
+		glUniformMatrix4fv(modelTransformUniform, 1, GL_FALSE, glm::value_ptr(modelTransform));
+
+		float distance = 1.2f + (sin(time * 2.0f) + 1.0f) * 2.0f;
+		glm::mat4 view = glm::lookAt(
+			glm::vec3( distance, distance, distance ),
+			glm::vec3( 0.0f, 0.0f, 0.0f ),
+			glm::vec3( 0.0f, 0.0f, 1.0f )
+		);
+		glUniformMatrix4fv(viewTransformUniform, 1, GL_FALSE, glm::value_ptr(view));
 
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, 0);
 
@@ -137,6 +184,16 @@ void GLContext::create()
 
 	delete textureOne;
 	delete textureTwo;
+}
+
+void GLFWCALL keyboardCallback(int key, int action)
+{
+	if (glfwGetKey(GLFW_KEY_ESC) == GLFW_PRESS) {
+		bRunning = false;
+	}
+	else if (glfwGetKey(GLFW_KEY_SPACE) == GLFW_PRESS) {
+		bDoFlip = true;
+	}
 }
 
 void GLContext::destroy() 
