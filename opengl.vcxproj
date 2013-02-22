@@ -71,7 +71,6 @@
     <ClCompile Include="GLShader.cpp" />
     <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="GLTextureFactory.cpp" />
-    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLContext.h" />

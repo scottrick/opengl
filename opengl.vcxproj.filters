@@ -708,9 +708,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GLContext.cpp">
       <Filter>Source Files\opengl</Filter>
     </ClCompile>
