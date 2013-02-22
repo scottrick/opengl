@@ -36,7 +36,10 @@ void GLContext::create()
 {
 	bRunning = true;
 
-	glfwInit();
+	if (!glfwInit()) {
+		cout << "Error glfwInit" << endl;
+		return;
+	}
 
 	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
 	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 2);
