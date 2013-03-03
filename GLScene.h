@@ -6,7 +6,11 @@ public:
     GLScene();
     ~GLScene();
 
-    void render();
+	virtual void create() = 0;
+	virtual void destroy() = 0;
+
+	virtual void prepareRender() = 0;
+    virtual void render() = 0;
 
 protected:
 
