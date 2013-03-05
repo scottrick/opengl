@@ -3,7 +3,9 @@
 #include <string>
 #include <GL/glew.h>
 
-class GLShader
+#include "../scottbase/Unknown.h"
+
+class GLShader : public Unknown
 {
 public:
 	GLShader(std::string filename);

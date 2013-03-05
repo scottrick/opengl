@@ -11,8 +11,3 @@ GLScene::~GLScene()
 {
 
 }
-
-void GLScene::render()
-{
-
-}

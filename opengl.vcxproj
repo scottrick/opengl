@@ -66,6 +66,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GLCameraScene.cpp" />
     <ClCompile Include="GLContext.cpp" />
     <ClCompile Include="GLScene.cpp" />
     <ClCompile Include="GLShader.cpp" />
@@ -73,6 +74,7 @@
     <ClCompile Include="GLTextureFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GLCameraScene.h" />
     <ClInclude Include="GLContext.h" />
     <ClInclude Include="glm\core\func_common.hpp" />
     <ClInclude Include="glm\core\func_exponential.hpp" />
@@ -304,6 +306,11 @@
     <None Include="glm\gtx\vector_query.inl" />
     <None Include="glm\gtx\verbose_operator.inl" />
     <None Include="glm\gtx\wrap.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\scottbase\scottbase.vcxproj">
+      <Project>{e1395bbd-777c-4a58-a0f1-9f1407655218}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
