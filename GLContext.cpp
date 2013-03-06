@@ -147,21 +147,30 @@ void GLContext::dumpInfo()
     cout << "GL_SHADELANG: " << shaderLang << endl;
 }
 
-unsigned int GLContext::contextWidth() {
+unsigned int GLContext::contextWidth() 
+{
 	return contextWindowWidth;
 }
 
-unsigned int GLContext::contextHeight() {
+unsigned int GLContext::contextHeight() 
+{
 	return contextWindowHeight;
 }
 
-void GLContext::setScene(GLScene *scene) {
-	if (pScene != scene) {
-		if (pScene) {
-			delete pScene;
+void GLContext::setScene(GLScene *scene) 
+{
+	if (pScene != scene) 
+    {
+		if (pScene) 
+        {
+            pScene->Release();
 			pScene = 0;
 		}
 
-		pScene = scene;
+        if (scene) 
+        {
+            pScene = scene;
+            pScene->AddRef();
+        }
 	}
 }
