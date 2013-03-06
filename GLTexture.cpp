@@ -34,3 +34,7 @@ GLuint GLTexture::getTexture() const
 {
 	return texture;
 }
+
+const char *GLTexture::GetClassName() const {
+    return "GLTexture";
+}

@@ -9,12 +9,15 @@ class GLShader : public Unknown
 {
 public:
 	GLShader(std::string filename);
-	~GLShader(void);
 
 	GLuint getShader() const;
 
+    const char *GetClassName() const;
+
 protected:
-	void compile(std::string filename);
+	~GLShader();
+
+    void compile(std::string filename);
 
 private:
 	GLuint shader;

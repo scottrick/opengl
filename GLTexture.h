@@ -1,15 +1,22 @@
 #pragma once
 
+#include "../scottbase/Unknown.h"
+
 #include <GL/glew.h>
 
-class GLTexture
+class GLTexture : public Unknown
 {
 public:
 	GLTexture(int width, int height, unsigned char *data, bool mipmap);
-	~GLTexture();
 
 	GLuint getTexture() const;
-	
+
+    //unknown
+    const char *GetClassName() const;
+
+protected:
+   	~GLTexture();
+
 private:
 	GLuint texture;
 };

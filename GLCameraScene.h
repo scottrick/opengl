@@ -7,10 +7,12 @@
 class GLCameraScene : public GLScene
 {
 public:
-    GLCameraScene(void);
-    ~GLCameraScene(void);
+    GLCameraScene();
 
     virtual const char *GetClassName() const;
+
+protected:
+    ~GLCameraScene();
 
 private:
     GLfloat x;

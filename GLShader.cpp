@@ -9,7 +9,7 @@ GLShader::GLShader(std::string filename) {
 	compile(filename);
 }
 
-GLShader::~GLShader(void) {
+GLShader::~GLShader() {
 	glDeleteShader(shader);
 }
 
@@ -53,4 +53,8 @@ void GLShader::compile(std::string filename) {
 
 GLuint GLShader::getShader() const {
 	return shader;
+}
+
+const char *GLShader::GetClassName() const {
+    return "GLShader"; 
 }
