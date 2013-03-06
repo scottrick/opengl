@@ -4,6 +4,8 @@
 
 #include <GL/glew.h>
 
+class GLCamera;
+
 class GLCameraScene : public GLScene
 {
 public:
@@ -14,7 +16,8 @@ public:
 protected:
     ~GLCameraScene();
 
-private:
-    GLfloat x;
-};
+    GLCamera *pCamera;
+    void setCamera(GLCamera *camera);
 
+private:
+};
