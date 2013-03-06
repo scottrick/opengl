@@ -407,6 +407,15 @@
     <ClInclude Include="GLCamera.h">
       <Filter>Source Files\opengl</Filter>
     </ClInclude>
+    <ClInclude Include="GLColoredGeometry.h">
+      <Filter>Source Files\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="GLRenderable.h">
+      <Filter>Source Files\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="GLShaderManager.h">
+      <Filter>Source Files\opengl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="glm\core\func_common.inl">
@@ -733,6 +742,15 @@
       <Filter>Source Files\opengl</Filter>
     </ClCompile>
     <ClCompile Include="GLCamera.cpp">
+      <Filter>Source Files\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="GLColoredGeometry.cpp">
+      <Filter>Source Files\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="GLRenderable.cpp">
+      <Filter>Source Files\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="GLShaderManager.cpp">
       <Filter>Source Files\opengl</Filter>
     </ClCompile>
   </ItemGroup>

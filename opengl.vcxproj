@@ -69,8 +69,11 @@
     <ClCompile Include="GLCamera.cpp" />
     <ClCompile Include="GLCameraScene.cpp" />
     <ClCompile Include="GLContext.cpp" />
+    <ClCompile Include="GLColoredGeometry.cpp" />
+    <ClCompile Include="GLRenderable.cpp" />
     <ClCompile Include="GLScene.cpp" />
     <ClCompile Include="GLShader.cpp" />
+    <ClCompile Include="GLShaderManager.cpp" />
     <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="GLTextureFactory.cpp" />
   </ItemGroup>
@@ -78,6 +81,7 @@
     <ClInclude Include="GLCamera.h" />
     <ClInclude Include="GLCameraScene.h" />
     <ClInclude Include="GLContext.h" />
+    <ClInclude Include="GLColoredGeometry.h" />
     <ClInclude Include="glm\core\func_common.hpp" />
     <ClInclude Include="glm\core\func_exponential.hpp" />
     <ClInclude Include="glm\core\func_geometric.hpp" />
@@ -200,8 +204,10 @@
     <ClInclude Include="glm\gtx\verbose_operator.hpp" />
     <ClInclude Include="glm\gtx\wrap.hpp" />
     <ClInclude Include="glm\virtrev\xstream.hpp" />
+    <ClInclude Include="GLRenderable.h" />
     <ClInclude Include="GLScene.h" />
     <ClInclude Include="GLShader.h" />
+    <ClInclude Include="GLShaderManager.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="GLTextureFactory.h" />
     <ClInclude Include="GLUtility.h" />
