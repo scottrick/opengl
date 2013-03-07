@@ -6,7 +6,7 @@
 class GLColoredGeometry : public GLRenderable
 {
 public:
-    GLColoredGeometry(GLfloat *vertices, unsigned int *elements, unsigned int count);
+    GLColoredGeometry(GLfloat vertices[], GLuint numVertices, GLuint elements[], GLuint numElements);
 
     //renderable
     void render() const;
@@ -22,6 +22,8 @@ protected:
 
     GLuint vbo;
     GLuint ebo;
+
+    GLuint numElements;
 
 };
 

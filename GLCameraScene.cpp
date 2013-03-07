@@ -15,16 +15,33 @@ GLCameraScene::GLCameraScene()
     setCamera(camera);
     camera->Release();
 
-    float vertices[] = {
-	-0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, //x, y, z, r, g, b
-	0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 
-	0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 
-	0.5f,  0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 
-	-0.5f,  0.5f, -0.5f, 1.0f, 0.0f, 0.0f,  
+    GLfloat vertices[] = {
+	-0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f, //x, y, z, r, g, b
+	0.5f, -0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 
+	0.5f,  0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 
+	-0.5f,  0.5f, 0.5f, 1.0f, 1.0f, 0.0f, 
 	-0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 1.0f,
+	0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 1.0f, 
+	0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 
+	-0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 
     };
 
-    pRenderable = new GLColoredGeometry(vertices, 0, 6);
+    GLuint elements[] = {
+        0, 1, 2, //front
+        0, 2, 3,
+        1, 5, 6, //right
+        1, 6, 2,
+        5, 4, 7, //back
+        5, 7, 6,
+        4, 0, 3, //left
+        4, 3, 7,
+        3, 2, 6, //top
+        3, 6, 7,
+        4, 5, 1, //bottom 
+        4, 1, 0,
+    };
+
+    pRenderable = new GLColoredGeometry(vertices, 8, elements, 36);
 }
 
 GLCameraScene::~GLCameraScene() 
