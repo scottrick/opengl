@@ -57,7 +57,7 @@ void GLColoredGeometry::render() const
     glDrawElements(GL_TRIANGLES, numElements, GL_UNSIGNED_INT, 0);
 }
 
-const char *GLColoredGeometry::GetClassName() const 
+const char *GLColoredGeometry::getClassName() const 
 {
     return "GLColoredGeometry";
 }

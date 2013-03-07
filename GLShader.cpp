@@ -55,6 +55,6 @@ GLuint GLShader::getShader() const {
 	return shader;
 }
 
-const char *GLShader::GetClassName() const {
+const char *GLShader::getClassName() const {
     return "GLShader"; 
 }

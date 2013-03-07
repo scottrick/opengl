@@ -12,7 +12,7 @@ public:
 	GLuint getTexture() const;
 
     //unknown
-    const char *GetClassName() const;
+    const char *getClassName() const;
 
 protected:
    	~GLTexture();

@@ -35,6 +35,6 @@ GLuint GLTexture::getTexture() const
 	return texture;
 }
 
-const char *GLTexture::GetClassName() const {
+const char *GLTexture::getClassName() const {
     return "GLTexture";
 }

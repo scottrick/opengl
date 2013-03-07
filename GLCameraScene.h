@@ -5,7 +5,6 @@
 #include <GL/glew.h>
 
 class GLCamera;
-class GLRenderable;
 
 class GLCameraScene : public GLScene
 {
@@ -14,15 +13,13 @@ public:
 
 	void render();
 
-    virtual const char *GetClassName() const;
+    virtual const char *getClassName() const;
 
 protected:
     ~GLCameraScene();
 
     GLCamera *pCamera;
     void setCamera(GLCamera *camera);
-
-    GLRenderable *pRenderable;
 
 private:
 };

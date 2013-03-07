@@ -162,14 +162,14 @@ void GLContext::setScene(GLScene *scene)
     {
 		if (pScene) 
         {
-            pScene->Release();
+            pScene->release();
 			pScene = 0;
 		}
 
         if (scene) 
         {
             pScene = scene;
-            pScene->AddRef();
+            pScene->addRef();
         }
 	}
 }

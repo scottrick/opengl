@@ -12,7 +12,7 @@ public:
 
 	GLuint getShader() const;
 
-    const char *GetClassName() const;
+    const char *getClassName() const;
 
 protected:
 	~GLShader();

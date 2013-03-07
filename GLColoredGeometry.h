@@ -13,7 +13,7 @@ public:
     GLuint getShaderProgram() const;
 
     //unknown
-    const char *GetClassName() const;
+    const char *getClassName() const;
 
 protected:
     ~GLColoredGeometry();

@@ -9,7 +9,7 @@ public:
     GLCamera();
 
     //unknown
-    const char *GetClassName() const;
+    const char *getClassName() const;
 
     GLfloat fov;
     GLfloat cameraX, cameraY, cameraZ;
