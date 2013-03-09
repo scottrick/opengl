@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-class GLUtility {
+class Utility {
 public:
 	static void checkError() {
 		GLenum error = glGetError();

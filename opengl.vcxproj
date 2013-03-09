@@ -77,6 +77,7 @@
     <ClCompile Include="GLShaderManager.cpp" />
     <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="GLTextureFactory.cpp" />
+    <ClCompile Include="Input.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLCamera.h" />
@@ -211,7 +212,8 @@
     <ClInclude Include="GLShaderManager.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="GLTextureFactory.h" />
-    <ClInclude Include="GLUtility.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="glm\core\func_common.inl" />

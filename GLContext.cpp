@@ -1,7 +1,8 @@
 #include "GLContext.h"
 
 #include "GLScene.h"
-#include "GLUtility.h"
+#include "Input.h"
+#include "Utility.h"
 
 #include <GL/glew.h>
 #include <GL/freeglut.h>
@@ -22,6 +23,8 @@ static unsigned int contextWindowWidth;
 static unsigned int contextWindowHeight;
 
 static GLdouble appStartTime = 0.0;
+static GLdouble previousTime = 0.0;
+static GLdouble currentTime = 0.0;
 
 static GLuint framesThisSecond = 0;
 static GLuint framesLastSecond = 0;
@@ -42,8 +45,7 @@ void GLContext::create(int numArgs, char **args, char *windowName, unsigned int 
 
 	//setup freeglut
 	glutInit(&numArgs, args);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_MULTISAMPLE);
 	glutInitWindowSize(contextWindowWidth, contextWindowHeight);
 	glutInitWindowPosition(64, 64);
 
@@ -63,23 +65,45 @@ void GLContext::create(int numArgs, char **args, char *windowName, unsigned int 
 	glewInit();
 
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_STENCIL_TEST);
 
-	GLUtility::checkError();
+	Utility::checkError();
 	GLContext::dumpInfo();
 }
 
 void GLContext::go() {
-    appStartTime = GLUtility::getSystemTime();
+    appStartTime = Utility::getSystemTime();
 	glutMainLoop();
 }
 
+void updateModifiers()
+{
+    GLulong modifiers = 0;
+    if (glutGetModifiers() & GLUT_ACTIVE_SHIFT) 
+    {
+        modifiers |= INPUT_MODIFIER_SHIFT;
+    }
+    if (glutGetModifiers() & GLUT_ACTIVE_CTRL)
+    {
+        modifiers |= INPUT_MODIFIER_CONTROL;
+    }
+    if (glutGetModifiers() & GLUT_ACTIVE_ALT)
+    {
+        modifiers |= INPUT_MODIFIER_ALT;
+    }
+    Input::sharedInput()->setModifiers(modifiers);
+}
+
 void keyboardDown(unsigned char key, int x, int y) {
-	cout << "keyboardDown " << (int)key << endl;
+	//cout << "keyboardDown " << (int)key << endl;
+    Input::sharedInput()->inputDown(key);
+    updateModifiers();
 }
 
 void keyboardUp(unsigned char key, int x, int y) {
-	cout << "keyUp " << (int)key << endl;
+	//cout << "keyUp " << (int)key << endl;
+    Input::sharedInput()->inputUp(key);
+    updateModifiers();
+
 	switch (key) {
 	case 27: //ESC
 		GLContext::destroy();
@@ -90,7 +114,13 @@ void keyboardUp(unsigned char key, int x, int y) {
 }
 
 void idle() {
-    GLdouble currentTime = GLUtility::getSystemTime() - appStartTime;
+    previousTime = currentTime;
+    currentTime = Utility::getSystemTime() - appStartTime;
+
+    if (pScene) 
+    {
+        pScene->update(currentTime, currentTime - previousTime);
+    }
 
     if (currentTime - fpsLastSecondTime >= 1.0) 
     { //its been a second, so update fps counters
@@ -99,19 +129,14 @@ void idle() {
         framesLastSecond = framesThisSecond;
         framesThisSecond = 0;
 
-        cout << "FPS: " << framesLastSecond << endl;
-    }
-
-    if (pScene) 
-    {
-        pScene->update(currentTime);
+        //cout << "FPS: " << framesLastSecond << endl;
     }
 
 	glutPostRedisplay();
 }
 
 void render() {
-	GLUtility::checkError();
+	Utility::checkError();
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);

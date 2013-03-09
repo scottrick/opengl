@@ -14,7 +14,7 @@ public:
     GLScene();
 
     virtual void render() = 0;
-    virtual void update(GLdouble time) = 0;
+    virtual void update(GLdouble time, GLdouble deltaTime) = 0;
 
     void addRenderable(GLRenderable *pRenderable);
     void removeRenderable(GLRenderable *pRenderable);

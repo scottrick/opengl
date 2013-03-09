@@ -9,11 +9,14 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\opengl">
-      <UniqueIdentifier>{a9210ada-bc90-4f05-998d-fea87f697d9e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\glm">
       <UniqueIdentifier>{2831aaa5-9351-4245-bd04-400ce1309111}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\utility">
+      <UniqueIdentifier>{9f5bcd3e-c11d-4789-a50b-49e57f3c11ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\opengl">
+      <UniqueIdentifier>{a9210ada-bc90-4f05-998d-fea87f697d9e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -398,9 +401,6 @@
     <ClInclude Include="GLTexture.h">
       <Filter>Source Files\opengl</Filter>
     </ClInclude>
-    <ClInclude Include="GLUtility.h">
-      <Filter>Source Files\opengl</Filter>
-    </ClInclude>
     <ClInclude Include="GLCameraScene.h">
       <Filter>Source Files\opengl</Filter>
     </ClInclude>
@@ -415,6 +415,12 @@
     </ClInclude>
     <ClInclude Include="GLShaderManager.h">
       <Filter>Source Files\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>Source Files\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Source Files\utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -752,6 +758,9 @@
     </ClCompile>
     <ClCompile Include="GLShaderManager.cpp">
       <Filter>Source Files\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Source Files\utility</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -76,13 +76,13 @@ void GLCameraScene::render()
 	        GLuint projTransformUniform = glGetUniformLocation(currentShaderProgram, "proj");
 
             //setup the camera
-            glm::mat4 proj = glm::perspective(pCamera->fov, (float)GLContext::contextWidth() / (float)GLContext::contextHeight(), 1.0f, 40.0f);
+            glm::mat4 proj = glm::perspective(pCamera->fov, (float)GLContext::contextWidth() / (float)GLContext::contextHeight(), 1.0f, 200.0f);
             glUniformMatrix4fv(projTransformUniform, 1, GL_FALSE, glm::value_ptr(proj));
 
             glm::mat4 view = glm::lookAt(
-                glm::vec3(pCamera->cameraX, pCamera->cameraY, pCamera->cameraZ),
-                glm::vec3(pCamera->lookAtX, pCamera->lookAtY, pCamera->lookAtZ),
-                glm::vec3(pCamera->upDirX, pCamera->upDirY, pCamera->upDirZ)
+                pCamera->pos,
+                pCamera->pos + pCamera->lookDir,
+                pCamera->upDir
             );
             glUniformMatrix4fv(viewTransformUniform, 1, GL_FALSE, glm::value_ptr(view));
         }
@@ -91,9 +91,12 @@ void GLCameraScene::render()
     }
 }
 
-void GLCameraScene::update(GLdouble time)
+void GLCameraScene::update(GLdouble time, GLdouble deltaTime)
 {
-
+    if (pCamera) 
+    {
+        pCamera->update(time, deltaTime);
+    }
 }
 
 const char *GLCameraScene::getClassName() const 

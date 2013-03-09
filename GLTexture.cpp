@@ -1,6 +1,6 @@
 #include "GLTexture.h"
 
-#include "GLUtility.h"
+#include "Utility.h"
 
 GLTexture::GLTexture(int width, int height, unsigned char *data, bool mipmap)
 {

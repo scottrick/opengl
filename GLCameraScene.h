@@ -12,7 +12,7 @@ public:
     GLCameraScene();
 
 	void render();
-    void update(GLdouble time);
+    void update(GLdouble time, GLdouble deltaTime);
 
     const char *getClassName() const;
 
