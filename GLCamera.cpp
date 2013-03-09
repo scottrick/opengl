@@ -5,7 +5,7 @@ GLCamera::GLCamera()
     fov = 45.0f;
     cameraX = 10.0f;
     cameraY = 10.5f;
-    cameraZ = 13.0f;
+    cameraZ = 23.0f;
     lookAtX = 0.0f;
     lookAtY = 0.0f;
     lookAtZ = 0.0f;

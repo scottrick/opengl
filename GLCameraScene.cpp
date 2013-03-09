@@ -16,7 +16,7 @@ GLCameraScene::GLCameraScene()
     setCamera(camera);
     camera->release();
 
-    for (float i = 1.0f; i < 9.0f; i += 1.99f) 
+    for (GLfloat i = 0.0f; i < 10.0f; i += 1.2f)
     {
         GLfloat vertices[] = {
 	    -0.5f + i, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f, //x, y, z, r, g, b
@@ -73,7 +73,7 @@ void GLCameraScene::render()
 	        GLuint projTransformUniform = glGetUniformLocation(currentShaderProgram, "proj");
 
             //setup the camera
-            glm::mat4 proj = glm::perspective(pCamera->fov, (float)GLContext::contextWidth() / (float)GLContext::contextHeight(), 1.0f, 20.0f);
+            glm::mat4 proj = glm::perspective(pCamera->fov, (float)GLContext::contextWidth() / (float)GLContext::contextHeight(), 1.0f, 40.0f);
             glUniformMatrix4fv(projTransformUniform, 1, GL_FALSE, glm::value_ptr(proj));
 
             glm::mat4 view = glm::lookAt(
