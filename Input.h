@@ -1,5 +1,6 @@
 #pragma once
 
+#include "glm/glm.hpp"
 #include <GL/glew.h>
 
 //define the KeyboardAlpha flags
@@ -41,13 +42,18 @@ class Input
 public:
     static Input *sharedInput();
 
+    //normal key stuff
     GLulong getKeyboardAlphaFlags() { return alphaFlags; }
-    GLulong getKeyboardModifierFlags() { return modifierFlags; }
-
     void inputDown(unsigned char key);
     void inputUp(unsigned char key);
 
+    //shift, alt, control stuff
     void setModifiers(GLulong modifiers);
+    GLulong getKeyboardModifierFlags() { return modifierFlags; }
+
+    //mouse stuff
+    void setMouseMovement(GLint x, GLint y);
+    const glm::ivec2 getMouseMovement() const;
 
 protected:
     Input();
@@ -59,4 +65,6 @@ protected:
 private:
     GLulong alphaFlags;
     GLulong modifierFlags;
+
+    glm::ivec2 mouseMovement;
 };

@@ -259,6 +259,17 @@ void Input::setModifiers(GLulong modifiers)
     modifierFlags = modifiers;
 }
 
+void Input::setMouseMovement(GLint x, GLint y)
+{
+    mouseMovement.x = x;
+    mouseMovement.y = y;
+}
+
+const glm::ivec2 Input::getMouseMovement() const
+{
+    return mouseMovement;
+}
+
 void Input::lowerAlphaFlags(GLulong dwFlags)
 {
 	dwFlags = ~dwFlags;

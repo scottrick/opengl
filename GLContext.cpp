@@ -16,6 +16,8 @@ void idle();
 void render();
 void keyboardDown(unsigned char key, int x, int y);
 void keyboardUp(unsigned char key, int x, int y);
+void mouseMoveActive(int x, int y);
+void mouseMovePassive(int x, int y);
 
 static bool bRunning = false;
 static bool bDrawFps = false;
@@ -49,7 +51,7 @@ void GLContext::create(int numArgs, char **args, char *windowName, unsigned int 
 	glutInit(&numArgs, args);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_MULTISAMPLE);
 	glutInitWindowSize(contextWindowWidth, contextWindowHeight);
-	glutInitWindowPosition(64, 64);
+	glutInitWindowPosition(320, 32);
 
 	if (windowName) {
 		glutCreateWindow(windowName);
@@ -62,6 +64,13 @@ void GLContext::create(int numArgs, char **args, char *windowName, unsigned int 
 	glutKeyboardUpFunc(keyboardUp);
 	glutDisplayFunc(render);
 	glutIdleFunc(idle);
+
+    glutMotionFunc(mouseMoveActive);
+    glutPassiveMotionFunc(mouseMovePassive);
+    glutSetCursor(GLUT_CURSOR_NONE);
+
+    //reset the mouse
+    glutWarpPointer(contextWindowWidth / 2, contextWindowHeight / 2);
 	
 	glewExperimental = GL_TRUE;
 	glewInit();
@@ -126,6 +135,16 @@ void keyboardUp(unsigned char key, int x, int y) {
 	}
 }
 
+void mouseMoveActive(int x, int y)
+{
+    Input::sharedInput()->setMouseMovement(x - contextWindowWidth / 2, y - contextWindowHeight / 2);
+}
+
+void mouseMovePassive(int x, int y)
+{
+    Input::sharedInput()->setMouseMovement(x - contextWindowWidth / 2, y - contextWindowHeight / 2);
+}
+
 void idle() {
     previousTime = currentTime;
     currentTime = Utility::getSystemTime() - appStartTime;
@@ -141,8 +160,12 @@ void idle() {
 
         framesLastSecond = framesThisSecond;
         framesThisSecond = 0;
+    }
 
-        //cout << "FPS: " << framesLastSecond << endl;
+    glm::ivec2 mouse = Input::sharedInput()->getMouseMovement();
+    if (mouse.x != 0 || mouse.y != 0)
+    {
+        glutWarpPointer(contextWindowWidth / 2, contextWindowHeight / 2);
     }
 
 	glutPostRedisplay();
