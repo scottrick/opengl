@@ -2,6 +2,10 @@
 
 #include <GL/glew.h>
 
+#ifdef WINDOWS
+#include <Windows.h>
+#endif
+
 #include <iostream>
 using namespace std;
 
@@ -13,4 +17,10 @@ public:
 			cout << "glError: " << error << endl;
 		}
 	}
+
+    static GLdouble getSystemTime() {
+#ifdef WINDOWS
+        return (GLdouble)GetTickCount64() / 1000.0;
+#endif
+    }
 };

@@ -12,8 +12,9 @@ public:
     GLCameraScene();
 
 	void render();
+    void update(GLdouble time);
 
-    virtual const char *getClassName() const;
+    const char *getClassName() const;
 
 protected:
     ~GLCameraScene();

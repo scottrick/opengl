@@ -2,6 +2,7 @@
 
 #include "../scottbase/Unknown.h"
 
+#include <GL/glew.h>
 #include <vector>
 using namespace std;
 
@@ -13,6 +14,7 @@ public:
     GLScene();
 
     virtual void render() = 0;
+    virtual void update(GLdouble time) = 0;
 
     void addRenderable(GLRenderable *pRenderable);
     void removeRenderable(GLRenderable *pRenderable);

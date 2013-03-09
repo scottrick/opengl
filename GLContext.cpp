@@ -21,6 +21,12 @@ static GLScene *pScene;
 static unsigned int contextWindowWidth;
 static unsigned int contextWindowHeight;
 
+static GLdouble appStartTime = 0.0;
+
+static GLuint framesThisSecond = 0;
+static GLuint framesLastSecond = 0;
+static GLdouble fpsLastSecondTime = 0.0;
+
 GLContext::GLContext() {
 
 }
@@ -64,6 +70,7 @@ void GLContext::create(int numArgs, char **args, char *windowName, unsigned int 
 }
 
 void GLContext::go() {
+    appStartTime = GLUtility::getSystemTime();
 	glutMainLoop();
 }
 
@@ -83,6 +90,23 @@ void keyboardUp(unsigned char key, int x, int y) {
 }
 
 void idle() {
+    GLdouble currentTime = GLUtility::getSystemTime() - appStartTime;
+
+    if (currentTime - fpsLastSecondTime >= 1.0) 
+    { //its been a second, so update fps counters
+        fpsLastSecondTime += 1.0;
+
+        framesLastSecond = framesThisSecond;
+        framesThisSecond = 0;
+
+        cout << "FPS: " << framesLastSecond << endl;
+    }
+
+    if (pScene) 
+    {
+        pScene->update(currentTime);
+    }
+
 	glutPostRedisplay();
 }
 
@@ -92,9 +116,12 @@ void render() {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 		
-	if (pScene) {
+	if (pScene) 
+    {
 		pScene->render();
 	}
+
+    framesThisSecond++;
 
 	glutSwapBuffers();
 }

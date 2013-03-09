@@ -45,6 +45,7 @@
       <Optimization>Disabled</Optimization>
       <AdditionalOptions>
       </AdditionalOptions>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions); WINDOWS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
