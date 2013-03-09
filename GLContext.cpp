@@ -8,6 +8,7 @@
 #include <GL/freeglut.h>
 
 #include <cassert>
+#include <sstream>
 #include <iostream>
 using namespace std;
 
@@ -17,6 +18,7 @@ void keyboardDown(unsigned char key, int x, int y);
 void keyboardUp(unsigned char key, int x, int y);
 
 static bool bRunning = false;
+static bool bDrawFps = false;
 static GLScene *pScene;
 
 static unsigned int contextWindowWidth;
@@ -97,6 +99,17 @@ void keyboardDown(unsigned char key, int x, int y) {
 	//cout << "keyboardDown " << (int)key << endl;
     Input::sharedInput()->inputDown(key);
     updateModifiers();
+
+    switch (key) {
+    case 27: //ESC
+        GLContext::destroy();
+        break;
+    case 6: //CTRL + f
+        bDrawFps = !bDrawFps;
+        break;
+    default:
+        break;
+	}
 }
 
 void keyboardUp(unsigned char key, int x, int y) {
@@ -135,6 +148,17 @@ void idle() {
 	glutPostRedisplay();
 }
 
+void renderFPS() 
+{
+    glRasterPos2f(-0.975f, -0.975f);
+    glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+    stringstream stream;
+    stream << framesLastSecond << " FPS";
+
+    glClear(GL_DEPTH_BUFFER_BIT);
+    glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*) stream.str().c_str());
+}
+
 void render() {
 	Utility::checkError();
 
@@ -145,6 +169,11 @@ void render() {
     {
 		pScene->render();
 	}
+
+    if (bDrawFps)
+    {
+        renderFPS();
+    }
 
     framesThisSecond++;
 
