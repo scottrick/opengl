@@ -1,7 +1,7 @@
 #include "GLCamera.h"
 
 #include "Input.h"
-#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtx/rotate_vector.hpp"
 
 GLCamera::GLCamera()
 {
@@ -24,7 +24,17 @@ void GLCamera::update(GLdouble time, GLdouble deltaTime)
     GLulong input = Input::sharedInput()->getKeyboardAlphaFlags();
     GLulong modifiers = Input::sharedInput()->getKeyboardModifierFlags();
     glm::ivec2 mouse = Input::sharedInput()->getMouseMovement();
-    
+
+    if (mouse.x)
+    {
+        lookDir = glm::rotate(lookDir, -0.2f * (GLfloat)mouse.x, upDir);
+    }
+
+    if (mouse.y)
+    {
+        lookDir = glm::rotate(lookDir, -0.2f * (GLfloat)mouse.y, glm::cross(lookDir, upDir));
+    }
+
     if (input & INPUT_CHAR_W) 
     { //moving forwards
         pos += lookDir * (speed * (GLfloat)deltaTime);
@@ -57,17 +67,6 @@ void GLCamera::update(GLdouble time, GLdouble deltaTime)
         { //moving up
             pos += upDir * (speed * (GLfloat)deltaTime);
         }
-    }
-
-    if (mouse.x)
-    {
-        //glm::mat2x3 rotationAroundY = glm::mat3x3(
-        //glm::mat4 rotation = glm::mat3
-    }
-
-    if (mouse.y)
-    {
-
     }
 }
 

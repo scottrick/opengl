@@ -16,9 +16,9 @@ GLCameraScene::GLCameraScene()
     setCamera(camera);
     camera->release();
 
-    for (GLfloat z = -40.0f; z < 40.0f; z += 1.5f) 
+    for (GLfloat z = -40.0f; z < 40.0f; z += 6.5f) 
     {
-        for (GLfloat x = -40.0f; x < 40.0f; x += 1.5f)
+        for (GLfloat x = -40.0f; x < 40.0f; x += 6.5f)
         {
             GLfloat vertices[] = {
 	        -0.5f + x, -0.5f, 0.5f + z, 1.0f, 0.0f, 0.0f, //x, y, z, r, g, b

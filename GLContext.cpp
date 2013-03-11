@@ -116,6 +116,12 @@ void keyboardDown(unsigned char key, int x, int y) {
     case 6: //CTRL + f
         bDrawFps = !bDrawFps;
         break;
+    case 13: //ENTER
+        if (Input::sharedInput()->getKeyboardModifierFlags() & INPUT_MODIFIER_ALT)
+        {
+            glutFullScreenToggle();
+        }
+        break;
     default:
         break;
 	}
@@ -148,10 +154,11 @@ void mouseMovePassive(int x, int y)
 void idle() {
     previousTime = currentTime;
     currentTime = Utility::getSystemTime() - appStartTime;
+    GLdouble deltaTime = currentTime - previousTime;
 
-    if (pScene) 
+    if (pScene)
     {
-        pScene->update(currentTime, currentTime - previousTime);
+        pScene->update(currentTime, deltaTime);
     }
 
     if (currentTime - fpsLastSecondTime >= 1.0) 
