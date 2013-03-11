@@ -18,6 +18,7 @@ void keyboardDown(unsigned char key, int x, int y);
 void keyboardUp(unsigned char key, int x, int y);
 void mouseMoveActive(int x, int y);
 void mouseMovePassive(int x, int y);
+void reshape(int width, int height);
 
 static bool bRunning = false;
 static bool bDrawFps = false;
@@ -49,7 +50,7 @@ void GLContext::create(int numArgs, char **args, char *windowName, unsigned int 
 
 	//setup freeglut
 	glutInit(&numArgs, args);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_MULTISAMPLE);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA | GLUT_MULTISAMPLE);
 	glutInitWindowSize(contextWindowWidth, contextWindowHeight);
 	glutInitWindowPosition(320, 32);
 
@@ -64,6 +65,7 @@ void GLContext::create(int numArgs, char **args, char *windowName, unsigned int 
 	glutKeyboardUpFunc(keyboardUp);
 	glutDisplayFunc(render);
 	glutIdleFunc(idle);
+    glutReshapeFunc(reshape);
 
     glutMotionFunc(mouseMoveActive);
     glutPassiveMotionFunc(mouseMovePassive);
@@ -208,6 +210,13 @@ void render() {
     framesThisSecond++;
 
 	glutSwapBuffers();
+}
+
+void reshape(int width, int height)
+{
+    contextWindowWidth = width;
+    contextWindowHeight = height;
+    glViewport(0, 0, width, height);
 }
 
 void GLContext::destroy() 

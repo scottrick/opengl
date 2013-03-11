@@ -76,7 +76,7 @@ void GLCameraScene::render()
 	        GLuint projTransformUniform = glGetUniformLocation(currentShaderProgram, "proj");
 
             //setup the camera
-            glm::mat4 proj = glm::perspective(pCamera->fov, (float)GLContext::contextWidth() / (float)GLContext::contextHeight(), 1.0f, 200.0f);
+            glm::mat4 proj = glm::perspective(pCamera->fov, (float)GLContext::contextWidth() / (float)GLContext::contextHeight(), 0.05f, 200.0f);
             glUniformMatrix4fv(projTransformUniform, 1, GL_FALSE, glm::value_ptr(proj));
 
             glm::mat4 view = glm::lookAt(

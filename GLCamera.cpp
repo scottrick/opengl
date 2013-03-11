@@ -5,7 +5,7 @@
 
 GLCamera::GLCamera()
 {
-    fov = 45.0f;
+    fov = 60.f;
     
     pos = glm::vec3(0.0f, 0.0f, 0.0f);
     lookDir = glm::vec3(0.0f, 0.0f, 1.0f);
