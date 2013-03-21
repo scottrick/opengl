@@ -75,7 +75,15 @@ void GLContext::create(int numArgs, char **args, char *windowName, unsigned int 
     glutWarpPointer(contextWindowWidth / 2, contextWindowHeight / 2);
 	
 	glewExperimental = GL_TRUE;
-	glewInit();
+	GLenum err = glewInit();
+
+	if (err != GLEW_OK)
+	{
+		const GLubyte *error = glewGetErrorString(err);
+		cout << "glewInit error: " << error << endl;
+		destroy();
+		return;
+	}
 
 	glEnable(GL_DEPTH_TEST);
 
@@ -255,15 +263,15 @@ void GLContext::dumpExtensions()
 
 void GLContext::dumpInfo()
 {
-    const GLubyte* version = glGetString(GL_VERSION);
-    const GLubyte* renderer = glGetString(GL_RENDERER);
-    const GLubyte* vendor = glGetString(GL_VENDOR);
-    const GLubyte* shaderLang = glGetString(GL_SHADING_LANGUAGE_VERSION);
+	const GLubyte* version = glGetString(GL_VERSION);
+	const GLubyte* renderer = glGetString(GL_RENDERER);
+	const GLubyte* vendor = glGetString(GL_VENDOR);
+	const GLubyte* shaderLang = glGetString(GL_SHADING_LANGUAGE_VERSION);
 
-    cout << "GL_VERSION:   " << version << endl;
-    cout << "GL_RENDERER:  " << renderer << endl;
-    cout << "GL_VENDOR:    " << vendor << endl;
-    cout << "GL_SHADELANG: " << shaderLang << endl;
+	cout << "GL_VERSION:   " << version << endl;
+	cout << "GL_RENDERER:  " << renderer << endl;
+	cout << "GL_VENDOR:    " << vendor << endl;
+	cout << "GL_SHADERLANG: " << shaderLang << endl << endl;
 }
 
 unsigned int GLContext::contextWidth() 
