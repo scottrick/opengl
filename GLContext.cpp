@@ -61,6 +61,9 @@ void GLContext::create(int numArgs, char **args, char *windowName, unsigned int 
 		glutCreateWindow(args[0]);
 	}
 
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+
 	glutKeyboardFunc(keyboardDown);
 	glutKeyboardUpFunc(keyboardUp);
 	glutDisplayFunc(render);
