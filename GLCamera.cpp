@@ -11,7 +11,7 @@ GLCamera::GLCamera()
     lookDir = glm::vec3(0.0f, 0.0f, 1.0f);
     upDir = glm::vec3(0.0f, 1.0f, 0.0f);
 
-    speed = 10.0f;
+    speed = 100.0f;
 }
 
 GLCamera::~GLCamera()
