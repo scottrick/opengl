@@ -15,6 +15,7 @@ public:
     virtual GLuint getShaderProgram() const = 0;
 
 	virtual const glm::mat4 &getModelMatrix() const = 0;
+	virtual GLuint getTriangleCount() const = 0;
 
 protected:
     ~GLRenderable();

@@ -9,6 +9,9 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
+#include <sstream>
+using namespace std;
+
 GLCameraScene::GLCameraScene() 
     : pCamera(0)
 {
@@ -60,6 +63,8 @@ GLCameraScene::~GLCameraScene()
 
 void GLCameraScene::render() 
 {
+	triangleCount = 0;
+
     GLuint currentShaderProgram = -1;
     vector<GLRenderable *>::iterator iter;
 
@@ -88,6 +93,7 @@ void GLCameraScene::render()
         }
 
         pRenderable->render();
+		triangleCount += pRenderable->getTriangleCount();
     }
 }
 
@@ -97,6 +103,14 @@ void GLCameraScene::update(GLdouble time, GLdouble deltaTime)
     {
         pCamera->update(time, deltaTime);
     }
+}
+
+string GLCameraScene::getRenderDebugString() const
+{
+	stringstream stream;
+    stream << triangleCount << " triangles";
+
+	return stream.str();
 }
 
 const char *GLCameraScene::getClassName() const 

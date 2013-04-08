@@ -21,7 +21,7 @@ void mouseMovePassive(int x, int y);
 void reshape(int width, int height);
 
 static bool bRunning = false;
-static bool bDrawFps = false;
+static bool bDrawInfo = false;
 static GLScene *pScene;
 
 static unsigned int contextWindowWidth;
@@ -127,7 +127,7 @@ void keyboardDown(unsigned char key, int x, int y) {
         GLContext::destroy();
         break;
     case 6: //CTRL + f
-        bDrawFps = !bDrawFps;
+        bDrawInfo = !bDrawInfo;
         break;
     case 13: //ENTER
         if (Input::sharedInput()->getKeyboardModifierFlags() & INPUT_MODIFIER_ALT)
@@ -198,8 +198,15 @@ void renderFPS()
     stringstream stream;
     stream << framesLastSecond << " FPS";
 
-    glClear(GL_DEPTH_BUFFER_BIT);
     glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*) stream.str().c_str());
+}
+
+void renderDebugString()
+{
+    glRasterPos2f(-0.975f, -0.90f);
+    glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+
+	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*) pScene->getRenderDebugString().c_str());
 }
 
 void render() {
@@ -211,12 +218,15 @@ void render() {
 	if (pScene) 
     {
 		pScene->render();
-	}
 
-    if (bDrawFps)
-    {
-        renderFPS();
-    }
+		if (bDrawInfo)
+		{
+		    glClear(GL_DEPTH_BUFFER_BIT);
+
+			renderFPS();
+			renderDebugString();
+		}
+	}
 
     framesThisSecond++;
 
