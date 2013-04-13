@@ -10,6 +10,7 @@
 #include "glm/gtc/type_ptr.hpp"
 
 #include <sstream>
+#include <iomanip>
 using namespace std;
 
 GLCameraScene::GLCameraScene() 
@@ -108,7 +109,8 @@ void GLCameraScene::update(GLdouble time, GLdouble deltaTime)
 string GLCameraScene::getRenderDebugString() const
 {
 	stringstream stream;
-    stream << triangleCount << " triangles";
+	stream << setiosflags(ios::fixed) << setprecision(2);
+	stream << "triangleCount: " << triangleCount << "    (" << pCamera->pos.x << ", " << pCamera->pos.y << ", " << pCamera->pos.z << ")";
 
 	return stream.str();
 }
